@@ -1,24 +1,27 @@
 {
-  "name": "js_blog",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/g1rz/JS_blog.git"
-  },
-  "author": "g1rz",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/g1rz/JS_blog/issues"
-  },
-  "homepage": "https://github.com/g1rz/JS_blog#readme",
-  "devDependencies": {
-    "webpack": "^4.39.2",
-    "webpack-cli": "^3.3.6",
-    "webpack-dev-server": "^3.8.0"
-  }
+    "name": "js_blog",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "build": "./node_modules/.bin/webpack --mode production",
+        "dev": "./node_modules/.bin/webpack --mode development",
+        "start": "./node_modules/.bin/webpack-dev-server --mode development --open"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/g1rz/JS_blog.git"
+    },
+    "author": "g1rz",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/g1rz/JS_blog/issues"
+    },
+    "homepage": "https://github.com/g1rz/JS_blog#readme",
+    "devDependencies": {
+        "html-webpack-plugin": "^3.2.0",
+        "webpack": "^4.39.2",
+        "webpack-cli": "^3.3.6",
+        "webpack-dev-server": "^3.8.0"
+    }
 }
