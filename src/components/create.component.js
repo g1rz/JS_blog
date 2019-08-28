@@ -24,11 +24,10 @@ function submitHandler(event) {
         const formData = {
             type: this.$el.type.value,
             ...this.form.value()
-        }
-        console.log(formData);
-    } else {
-        console.warn('Form is invalid!');
+        };
+
+        this.form.clear();
     }
-    
-    
+
+
 }

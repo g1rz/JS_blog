@@ -1,36 +1,61 @@
 import { Validators } from './validators';
+import { Z_STREAM_ERROR } from 'zlib';
 
 export class Form {
 
-  constructor(form, controls) {
-    this.form = form;
-    this.controls = controls;
-  }
+    constructor(form, controls) {
+        this.form = form;
+        this.controls = controls;
+    }
 
-  value() {
-    const value = {};
-    Object.keys(this.controls).forEach(control => {
-      value[control] = this.form[control].value
-    })
+    value() {
+        const value = {};
+        Object.keys(this.controls).forEach(control => {
+            value[control] = this.form[control].value;
+        });
 
-    return value;
-  }
+        return value;
+    }
 
-  isValid() {
-    let isFormValid = true;
-    
-    Object.keys(this.controls).forEach(control => {
-      const validators = this.controls[control];
+    clear() {
+        Object.keys(this.controls).forEach(control => {
+            this.form[control].value = '';
+        });
+    }
 
-      let isValid = true;
+    isValid() {
+        let isFormValid = true;
 
-      validators.forEach(validator => {
-        isValid = validator(this.form[control].value) && isValid;
-      });
+        Object.keys(this.controls).forEach(control => {
+            const validators = this.controls[control];
 
-      isFormValid = isFormValid && isValid;
-    })
+            let isValid = true;
 
-    return isFormValid;
-  }
+            validators.forEach(validator => {
+                isValid = validator(this.form[control].value) && isValid;
+            });
+
+            isValid ? clearError(this.form[control]) : setError(this.form[control]);
+
+            isFormValid = isFormValid && isValid;
+        });
+
+        return isFormValid;
+    }
+}
+
+function setError($control) {
+    clearError($control);
+    const error = '<p class="validation-error">Введите корректное значение</p>';
+    $control.classList.add('invalid');
+    $control.insertAdjacentHTML('afterend', error);
+}
+
+function clearError($control) {
+    $control.classList.remove('invalid');
+
+    if ($control.nextSibling) {
+        $control.closest('.form-control').removeChild($control.nextSibling);
+    }
+
 }
